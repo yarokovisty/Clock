@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg_nav_bar">#0d0d0d</color>
+    <color name="background">#000000</color>
+    <color name="item_active">#FFFFFF</color>
+    <color name="item_inactive">#575757</color>
+</resources>

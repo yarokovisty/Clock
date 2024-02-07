@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/alarm_item"
+        android:title="@string/timer"
+        android:icon="@drawable/icon_alarm"
+        android:orderInCategory="1"/>
+    <item
+        android:id="@+id/stop_watcher_item"
+        android:title="@string/stop_watcher"
+        android:icon="@drawable/icon_stopwatcher"
+        android:orderInCategory="2"/>
+    <item
+        android:id="@+id/timer_item"
+        android:title="@string/timer"
+        android:icon="@drawable/icon_timer"
+        android:orderInCategory="3"/>
+
+</menu>
