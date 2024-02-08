@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="DefaultNumberPickerTheme">
+        <item name="colorControlNormal">@color/transparent</item>
+        <item name="android:textColorPrimary">@color/primary_num_picker</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/textSizeNumPicker</item>
+    </style>
+    <style name="rounded_fab">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+</resources>

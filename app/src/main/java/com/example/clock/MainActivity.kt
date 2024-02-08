@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         if (savedInstanceState == null) {
-            router.replaceScreen(Screens.alarmScreen())
+            router.replaceScreen(Screens.timerScreen())
         }
     }
 

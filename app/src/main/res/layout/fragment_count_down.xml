@@ -6,17 +6,221 @@
     android:layout_height="match_parent"
     android:background="@color/background">
 
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bnvTimer"
+        style="@style/Widget.MaterialComponents.BottomNavigationView.PrimarySurface"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/bg_nav_bar"
-        style="@style/Widget.MaterialComponents.BottomNavigationView.PrimarySurface"
-        app:itemTextColor="@color/color_text_item"
         app:itemIconTint="@color/color_text_item"
+        app:itemTextColor="@color/color_text_item"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu_nav_bar"/>
+        app:menu="@menu/menu_nav_bar" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/contentLaunchTimer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="@dimen/horizontal_margin"
+        android:layout_marginTop="@dimen/top_margin"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/bnvTimer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btnClose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/horizontal_margin"
+                android:layout_marginEnd="@dimen/horizontal_margin"
+                android:layout_marginBottom="@dimen/bottom_margin_btn"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/icon_close"
+                app:backgroundTint="@color/bg_nav_bar"
+                app:rippleColor="@color/put_btn"
+                app:shapeAppearanceOverlay="@style/rounded_fab"
+                app:tint="@color/item_active" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btnStop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/horizontal_margin"
+                android:layout_marginEnd="@dimen/horizontal_margin"
+                android:layout_marginBottom="@dimen/bottom_margin_btn"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/icon_pause"
+                app:backgroundTint="@color/secondary"
+                app:rippleColor="@color/put_btn"
+                app:shapeAppearanceOverlay="@style/rounded_fab"
+                app:tint="@color/white" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="@dimen/sizeTimer"
+            android:layout_height="@dimen/sizeTimer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ProgressBar
+                android:id="@+id/pbTimer"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@drawable/gray_progressbar_background"
+                android:indeterminate="false"
+                android:max="10"
+                android:progress="10"
+                android:progressDrawable="@drawable/violent_progressbar_background"
+                android:rotation="-90" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/item_active"
+                    android:textSize="36sp"
+                    android:textStyle="bold"
+                    tools:text="00:00:00" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="@string/timer"
+                    android:textColor="@color/material_dynamic_neutral50" />
+            </LinearLayout>
+
+        </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/contentTimer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="@dimen/horizontal_margin"
+        android:layout_marginTop="@dimen/top_margin"
+        android:background="@color/background"
+        app:layout_constraintBottom_toTopOf="@+id/bnvTimer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <NumberPicker
+                android:id="@+id/npHour"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:theme="@style/DefaultNumberPickerTheme" />
+
+            <NumberPicker
+                android:id="@+id/npMinute"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:theme="@style/DefaultNumberPickerTheme" />
+
+            <NumberPicker
+                android:id="@+id/npSecond"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:theme="@style/DefaultNumberPickerTheme" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/often_timer"
+            android:textColor="@color/primary_num_picker"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+        <Button
+            android:id="@+id/btnAddTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:backgroundTint="@color/background"
+            android:padding="0dp"
+            android:text="@string/add"
+            android:textColor="@color/secondary"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+            app:rippleColor="@color/put_btn" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnAddTimer">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btnStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:layout_marginBottom="@dimen/bottom_margin_btn"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/icon_arrow_play"
+                app:backgroundTint="@color/secondary"
+                app:rippleColor="@color/put_btn"
+                app:shapeAppearanceOverlay="@style/rounded_fab"
+                app:tint="@color/white" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvTimers"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
