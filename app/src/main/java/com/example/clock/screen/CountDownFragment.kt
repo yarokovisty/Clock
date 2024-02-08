@@ -10,12 +10,16 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.example.clock.R
+import com.example.clock.data.ClockViewModel
 import com.example.clock.data.Constants
 import com.example.clock.databinding.FragmentCountDownBinding
+import com.example.clock.navigation.App
+import com.example.clock.ui.Screens
 
 class CountDownFragment : Fragment() {
     private var _binding: FragmentCountDownBinding? = null
     private val binding get() = _binding!!
+    private val viewModel = ClockViewModel(App.INSTANCE.clockRouter)
     private var timer: CountDownTimer? = null
     private var pause = false
 
@@ -32,6 +36,18 @@ class CountDownFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
          binding.apply {
+             val menuItem = bnvTimer.menu.findItem(R.id.timer_item)
+             menuItem.isChecked = true
+
+             bnvTimer.setOnItemSelectedListener {
+                 when(it.itemId) {
+                     R.id.alarm_item -> viewModel.replaceScreen(Screens.alarmScreen())
+                     R.id.stop_watcher_item -> viewModel.replaceScreen(Screens.stopWatchScreen())
+                 }
+
+                 true
+             }
+
              npHour.minValue = Constants.MIN_VALUE
              npHour.maxValue = Constants.MAX_VALUE
 

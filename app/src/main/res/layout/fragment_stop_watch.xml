@@ -8,12 +8,14 @@
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bnvStopWatcher"
+        style="@style/Widget.MaterialComponents.BottomNavigationView.PrimarySurface"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/bg_nav_bar"
-        style="@style/Widget.MaterialComponents.BottomNavigationView.PrimarySurface"
-        app:itemTextColor="@color/color_text_item"
         app:itemIconTint="@color/color_text_item"
+        app:itemRippleColor="@null"
+        app:itemTextColor="@color/color_text_item"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

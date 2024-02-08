@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:background="@color/bg_nav_bar"
         app:itemIconTint="@color/color_text_item"
+        app:itemRippleColor="@null"
         app:itemTextColor="@color/color_text_item"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,7 +32,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -43,13 +44,16 @@
                 android:id="@+id/btnClose"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/horizontal_margin"
                 android:layout_marginEnd="@dimen/horizontal_margin"
                 android:layout_marginBottom="@dimen/bottom_margin_btn"
                 android:clickable="true"
                 android:focusable="true"
                 android:src="@drawable/icon_close"
                 app:backgroundTint="@color/bg_nav_bar"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btnStop"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 app:rippleColor="@color/put_btn"
                 app:shapeAppearanceOverlay="@style/rounded_fab"
                 app:tint="@color/item_active" />
@@ -59,16 +63,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/horizontal_margin"
-                android:layout_marginEnd="@dimen/horizontal_margin"
                 android:layout_marginBottom="@dimen/bottom_margin_btn"
                 android:clickable="true"
                 android:focusable="true"
                 android:src="@drawable/icon_pause"
                 app:backgroundTint="@color/secondary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/btnClose"
+                app:layout_constraintTop_toTopOf="parent"
                 app:rippleColor="@color/put_btn"
                 app:shapeAppearanceOverlay="@style/rounded_fab"
                 app:tint="@color/white" />
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <FrameLayout
             android:layout_width="@dimen/sizeTimer"

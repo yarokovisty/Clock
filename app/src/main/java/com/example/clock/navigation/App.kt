@@ -5,8 +5,9 @@ import com.github.terrakok.cicerone.Cicerone
 
 class App : Application() {
     private val cicerone = Cicerone.create()
-    val router get() = cicerone.router
+    private val router get() = cicerone.router
     val navigatorHolder get() = cicerone.getNavigatorHolder()
+    val clockRouter: ClockRouter = ClockRouterImpl(router)
 
     override fun onCreate() {
         super.onCreate()
