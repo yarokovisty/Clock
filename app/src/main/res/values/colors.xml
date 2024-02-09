@@ -12,4 +12,6 @@
     <color name="min_secondary">#9440e3</color>
     <color name="medium_secondary">#8021d9</color>
     <color name="put_btn">#50d9d9d9</color>
+    <color name="cardView">#ffffff</color>
+    <color name="textCardView">#000000</color>
 </resources>

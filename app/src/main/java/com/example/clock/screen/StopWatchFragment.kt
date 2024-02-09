@@ -38,6 +38,7 @@ class StopWatchFragment : Fragment() {
         binding.apply {
             val menuItem = bnvStopWatcher.menu.findItem(R.id.stop_watcher_item)
             menuItem.isChecked = true
+
             bnvStopWatcher.setOnItemSelectedListener {
                 when (it.itemId) {
                     R.id.alarm_item -> viewModel.replaceScreen(Screens.alarmScreen())

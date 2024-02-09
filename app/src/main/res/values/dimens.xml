@@ -2,7 +2,12 @@
 <resources>
     <dimen name="horizontal_margin">24dp</dimen>
     <dimen name="bottom_margin_btn">32dp</dimen>
+    <dimen name="corner_cardview">8dp</dimen>
+    <dimen name="horizontal_text_item_timer">8dp</dimen>
+    <dimen name="vertical_text_item_timer">12dp</dimen>
+    <dimen name="horizontal_margin_float">4dp</dimen>
     <dimen name="textSizeNumPicker">42sp</dimen>
+    <dimen name="textSizeBtnCardView"></dimen>
     <dimen name="top_margin">64dp</dimen>
     <dimen name="sizeTimer">250dp</dimen>
 </resources>

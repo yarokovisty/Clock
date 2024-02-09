@@ -7,7 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
 import androidx.core.view.isVisible
 import com.example.clock.R
 import com.example.clock.data.ClockViewModel
@@ -21,7 +23,7 @@ class CountDownFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel = ClockViewModel(App.INSTANCE.clockRouter)
     private var timer: CountDownTimer? = null
-    private var pause = false
+    private var pause = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,6 +41,8 @@ class CountDownFragment : Fragment() {
              val menuItem = bnvTimer.menu.findItem(R.id.timer_item)
              menuItem.isChecked = true
 
+             btnClose.alpha = 0f
+
              bnvTimer.setOnItemSelectedListener {
                  when(it.itemId) {
                      R.id.alarm_item -> viewModel.replaceScreen(Screens.alarmScreen())
@@ -46,6 +50,10 @@ class CountDownFragment : Fragment() {
                  }
 
                  true
+             }
+
+             btnAddTimer.setOnClickListener {
+                 showDialogTimer()
              }
 
              npHour.minValue = Constants.MIN_VALUE
@@ -57,15 +65,14 @@ class CountDownFragment : Fragment() {
              npSecond.minValue = Constants.MIN_VALUE
              npSecond.maxValue = Constants.MAX_VALUE
 
-             btnStart.setOnClickListener{
-                startCountDownTimer()
+             btnLaunch.setOnClickListener {
+                 if (pause) startCountDownTimer()
+                 else pauseCountDownTimer()
              }
              btnClose.setOnClickListener {
                  closeCountDownTimer()
              }
-             btnStop.setOnClickListener {
-                 pauseCountDownTimer()
-             }
+
          }
     }
 
@@ -77,24 +84,49 @@ class CountDownFragment : Fragment() {
     private fun startCountDownTimer() = with(binding) {
         contentTimer.isVisible = false
         contentLaunchTimer.isVisible = true
+        pause = false
+
+        btnLaunch.setImageDrawable(ContextCompat.getDrawable(requireActivity(), R.drawable.icon_pause))
+
+        ViewCompat.animate(btnClose)
+            .alpha(1f)
+            .setDuration(150).interpolator = AccelerateDecelerateInterpolator()
+        ViewCompat.animate(btnLaunch)
+            .translationX(120f)
+            .setDuration(300).interpolator = AccelerateDecelerateInterpolator()
+
 
     }
 
     private fun closeCountDownTimer() = with(binding) {
         contentTimer.isVisible = true
         contentLaunchTimer.isVisible = false
-        pause = false
-        btnStop.setImageDrawable(ContextCompat.getDrawable(requireActivity(), R.drawable.icon_pause))
+        pause = true
+        btnLaunch.setImageDrawable(ContextCompat.getDrawable(requireActivity(), R.drawable.icon_arrow_play))
+
+        ViewCompat.animate(btnLaunch)
+            .translationX(0f)
+            .setDuration(300).interpolator = AccelerateDecelerateInterpolator()
+        ViewCompat.animate(btnClose)
+            .alpha(0f)
+            .setDuration(300).interpolator = AccelerateDecelerateInterpolator()
+
+
     }
 
     private fun pauseCountDownTimer() = with(binding) {
-        pause = if (!pause) {
-            btnStop.setImageDrawable(ContextCompat.getDrawable(requireActivity(), R.drawable.icon_arrow_play))
-            true
-        } else {
-            btnStop.setImageDrawable(ContextCompat.getDrawable(requireActivity(), R.drawable.icon_pause))
+        pause = if (pause) {
+            btnLaunch.setImageDrawable(ContextCompat.getDrawable(requireActivity(), R.drawable.icon_pause))
             false
+        } else {
+            btnLaunch.setImageDrawable(ContextCompat.getDrawable(requireActivity(), R.drawable.icon_arrow_play))
+            true
         }
+
+    }
+
+    private fun showDialogTimer() {
+
     }
 
 }

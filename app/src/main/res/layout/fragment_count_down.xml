@@ -20,6 +20,47 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/menu_nav_bar" />
 
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/bottom_margin_btn"
+        app:layout_constraintBottom_toTopOf="@+id/bnvTimer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="48dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/icon_close"
+            android:layout_marginVertical="@dimen/horizontal_margin"
+            app:backgroundTint="@color/bg_nav_bar"
+            app:rippleColor="@color/put_btn"
+            app:shapeAppearanceOverlay="@style/rounded_fab"
+            app:tint="@color/item_active"
+            app:elevation="0dp"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnLaunch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/icon_arrow_play"
+            android:layout_marginVertical="@dimen/horizontal_margin"
+            app:backgroundTint="@color/secondary"
+            app:rippleColor="@color/put_btn"
+            app:shapeAppearanceOverlay="@style/rounded_fab"
+            app:tint="@color/white"
+            app:elevation="0dp"/>
+    </FrameLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/contentLaunchTimer"
         android:layout_width="0dp"
@@ -27,55 +68,10 @@
         android:layout_marginHorizontal="@dimen/horizontal_margin"
         android:layout_marginTop="@dimen/top_margin"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/bnvTimer"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/btnClose"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/horizontal_margin"
-                android:layout_marginBottom="@dimen/bottom_margin_btn"
-                android:clickable="true"
-                android:focusable="true"
-                android:src="@drawable/icon_close"
-                app:backgroundTint="@color/bg_nav_bar"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/btnStop"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:rippleColor="@color/put_btn"
-                app:shapeAppearanceOverlay="@style/rounded_fab"
-                app:tint="@color/item_active" />
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/btnStop"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/horizontal_margin"
-                android:layout_marginBottom="@dimen/bottom_margin_btn"
-                android:clickable="true"
-                android:focusable="true"
-                android:src="@drawable/icon_pause"
-                app:backgroundTint="@color/secondary"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/btnClose"
-                app:layout_constraintTop_toTopOf="parent"
-                app:rippleColor="@color/put_btn"
-                app:shapeAppearanceOverlay="@style/rounded_fab"
-                app:tint="@color/white" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <FrameLayout
             android:layout_width="@dimen/sizeTimer"
@@ -133,7 +129,7 @@
         android:layout_marginHorizontal="@dimen/horizontal_margin"
         android:layout_marginTop="@dimen/top_margin"
         android:background="@color/background"
-        app:layout_constraintBottom_toTopOf="@+id/bnvTimer"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -207,20 +203,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnAddTimer">
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/btnStart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|center"
-                android:layout_marginBottom="@dimen/bottom_margin_btn"
-                android:clickable="true"
-                android:focusable="true"
-                android:src="@drawable/icon_arrow_play"
-                app:backgroundTint="@color/secondary"
-                app:rippleColor="@color/put_btn"
-                app:shapeAppearanceOverlay="@style/rounded_fab"
-                app:tint="@color/white" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvTimers"
