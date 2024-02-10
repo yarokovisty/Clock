@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#262626">
+    android:background="@color/background">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -40,12 +40,13 @@
                 android:textSize="16sp" />
 
             <EditText
-                android:id="@+id/editTextText"
+                android:id="@+id/etNameTimer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/input"
                 android:inputType="text"
+                android:textColor="@color/textCardView"
                 app:endIconMode="clear_text" />
 
 
@@ -77,16 +78,19 @@
             android:paddingBottom="12dp">
 
             <NumberPicker
+                android:id="@+id/dialogHourNumPicker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
             <NumberPicker
+                android:id="@+id/dialogMinuteNumPicker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
             <NumberPicker
+                android:id="@+id/dialogSecondNumPicker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
@@ -99,43 +103,47 @@
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btnCancel"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="@color/transparent"
+            android:backgroundTint="@color/background"
             android:padding="0dp"
             android:text="@string/cancel"
             android:textColor="@color/secondary"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:rippleColor="@color/put_btn" />
 
         <TextView
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/horizontal_margin"
+            android:layout_marginHorizontal="12dp"
             android:layout_weight="1"
             android:gravity="center"
+            android:text="@string/add_timer"
             android:textColor="@color/textCardView"
             android:textSize="18sp"
             android:textStyle="bold"
-            tools:text="Добавить таймер" />
+            app:rippleColor="@color/put_btn" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btnReady"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="@color/transparent"
+            android:backgroundTint="@color/background"
             android:padding="0dp"
             android:text="@string/ready"
             android:textColor="@color/secondary"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:rippleColor="@color/put_btn" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

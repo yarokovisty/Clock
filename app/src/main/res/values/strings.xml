@@ -11,4 +11,5 @@
     <string name="ready">Готово</string>
     <string name="input">Ввести</string>
     <string name="description">Описание</string>
+    <string name="add_timer">Добавить таймер</string>
 </resources>

@@ -1,12 +1,17 @@
 package com.example.clock.screen
 
+import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.view.WindowManager
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
@@ -125,8 +130,16 @@ class CountDownFragment : Fragment() {
 
     }
 
-    private fun showDialogTimer() {
+    @SuppressLint("InflateParams")
+    private fun showDialogTimer(){
+        val builder = AlertDialog.Builder(context)
+        val inflater = requireActivity().layoutInflater
+        builder.setView(inflater.inflate(R.layout.dialog_timer, null))
+        val alertDialog = builder.create()
 
+
+
+        alertDialog.show()
     }
 
 }
