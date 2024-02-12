@@ -7,7 +7,7 @@
     <dimen name="vertical_text_item_timer">12dp</dimen>
     <dimen name="horizontal_margin_float">4dp</dimen>
     <dimen name="textSizeNumPicker">42sp</dimen>
-    <dimen name="textSizeBtnCardView"></dimen>
+    <dimen name="textSizeDialogNumPicker">20sp</dimen>
     <dimen name="top_margin">64dp</dimen>
     <dimen name="sizeTimer">250dp</dimen>
 </resources>

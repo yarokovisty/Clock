@@ -24,7 +24,7 @@
         android:id="@+id/frameLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/bottom_margin_btn"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/bnvTimer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -34,31 +34,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginVertical="@dimen/horizontal_margin"
             android:layout_marginEnd="48dp"
             android:clickable="true"
             android:focusable="true"
             android:src="@drawable/icon_close"
-            android:layout_marginVertical="@dimen/horizontal_margin"
             app:backgroundTint="@color/bg_nav_bar"
+            app:elevation="0dp"
             app:rippleColor="@color/put_btn"
             app:shapeAppearanceOverlay="@style/rounded_fab"
-            app:tint="@color/item_active"
-            app:elevation="0dp"/>
+            app:tint="@color/item_active" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btnLaunch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginVertical="@dimen/horizontal_margin"
             android:clickable="true"
             android:focusable="true"
             android:src="@drawable/icon_arrow_play"
-            android:layout_marginVertical="@dimen/horizontal_margin"
             app:backgroundTint="@color/secondary"
+            app:elevation="0dp"
             app:rippleColor="@color/put_btn"
             app:shapeAppearanceOverlay="@style/rounded_fab"
-            app:tint="@color/white"
-            app:elevation="0dp"/>
+            app:tint="@color/white" />
     </FrameLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -100,7 +100,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/tvTimer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -110,7 +110,7 @@
                     tools:text="00:00:00" />
 
                 <TextView
-                    android:id="@+id/textView3"
+                    android:id="@+id/tvNamedTimer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -207,7 +207,8 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvTimers"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

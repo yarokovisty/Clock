@@ -39,15 +39,22 @@
                 android:textColor="@color/textCardView"
                 android:textSize="16sp" />
 
-            <EditText
-                android:id="@+id/etNameTimer"
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/input"
-                android:inputType="text"
-                android:textColor="@color/textCardView"
-                app:endIconMode="clear_text" />
+                app:endIconMode="clear_text"
+                app:boxStrokeColor="@color/secondary">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etNameTimer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/input"
+                    android:maxLength="30"
+                    android:inputType="text"
+                    android:textColor="@color/textCardView"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
 
 
         </LinearLayout>
@@ -81,19 +88,22 @@
                 android:id="@+id/dialogHourNumPicker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:theme="@style/DialogNumberPickerTheme"/>
 
             <NumberPicker
                 android:id="@+id/dialogMinuteNumPicker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:theme="@style/DialogNumberPickerTheme"/>
 
             <NumberPicker
                 android:id="@+id/dialogSecondNumPicker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:theme="@style/DialogNumberPickerTheme"/>
 
 
         </LinearLayout>
