@@ -15,4 +15,7 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
+    <style name="ColorIconToolbar">
+        <item name="android:textColorSecondary">@color/primary_num_picker</item>
+    </style>
 </resources>

@@ -45,14 +45,15 @@
                 android:layout_height="wrap_content"
                 app:endIconMode="clear_text"
                 app:boxStrokeColor="@color/secondary">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etNameTimer"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="@string/input"
-                    android:maxLength="30"
                     android:inputType="text"
-                    android:textColor="@color/textCardView"/>
+                    android:maxLength="30"
+                    android:text="@string/timer"
+                    android:textColor="@color/textCardView" />
             </com.google.android.material.textfield.TextInputLayout>
 
 

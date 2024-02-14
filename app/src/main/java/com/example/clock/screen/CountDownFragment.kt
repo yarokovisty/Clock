@@ -5,9 +5,13 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
+import android.widget.NumberPicker
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
@@ -16,6 +20,7 @@ import com.example.clock.R
 import com.example.clock.data.ClockViewModel
 import com.example.clock.data.Constants
 import com.example.clock.data.rv.OnItemClickListener
+import com.example.clock.data.rv.OnItemLongClickListener
 import com.example.clock.data.rv.TimerModel
 import com.example.clock.data.rv.TimerAdapter
 import com.example.clock.databinding.DialogTimerBinding
@@ -26,7 +31,7 @@ import java.sql.Time
 import java.util.Timer
 import java.util.TimerTask
 
-class CountDownFragment : Fragment(), OnItemClickListener {
+class CountDownFragment : Fragment(), OnItemClickListener, OnItemLongClickListener {
     private var _binding: FragmentCountDownBinding? = null
     private val binding get() = _binding!!
     private val viewModel = ClockViewModel(App.INSTANCE.clockRouter)
@@ -47,12 +52,13 @@ class CountDownFragment : Fragment(), OnItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = TimerAdapter(this@CountDownFragment)
-
+        adapter = TimerAdapter(this@CountDownFragment, this@CountDownFragment)
 
          binding.apply {
              val menuItem = bnvTimer.menu.findItem(R.id.timer_item)
              menuItem.isChecked = true
+
+             tbTimer.navigationIcon?.setTint(ContextCompat.getColor(requireContext(), R.color.primary_num_picker))
 
              btnClose.alpha = 0f
 
@@ -69,39 +75,51 @@ class CountDownFragment : Fragment(), OnItemClickListener {
                  showDialogTimer()
              }
 
-             npHour.minValue = Constants.MIN_VALUE
-             npHour.maxValue = Constants.MAX_VALUE
-             npHour.displayedValues = Constants.RANGE
-             npHour.setOnScrollListener { _, _ ->
-                 if (adapter?.selectedTimer != null) {
-                     adapter?.selectedTimer = null
-                     tvNamedTimer.setText(R.string.timer)
-                     rvTimers.adapter = adapter
+             npHour.apply {
+                 minValue = Constants.MIN_VALUE
+                 maxValue = Constants.MAX_VALUE
+                 displayedValues = Constants.RANGE
+                 setOnScrollListener { _, _ ->
+                     if (adapter?.selectedTimer != null) {
+                         adapter?.selectedTimer = null
+                         tvNamedTimer.setText(R.string.timer)
+                         rvTimers.adapter = adapter
+                     }
+
                  }
+                 descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
 
              }
 
-             npMinute.minValue = Constants.MIN_VALUE
-             npMinute.maxValue = Constants.MAX_VALUE
-             npMinute.displayedValues = Constants.RANGE
-             npMinute.setOnScrollListener { _, _ ->
-                 if (adapter?.selectedTimer != null) {
-                     adapter?.selectedTimer = null
-                     tvNamedTimer.setText(R.string.timer)
-                     rvTimers.adapter = adapter
+
+             npMinute.apply {
+                 minValue = Constants.MIN_VALUE
+                 maxValue = Constants.MAX_VALUE
+                 displayedValues = Constants.RANGE
+                 setOnScrollListener { _, _ ->
+                     if (adapter?.selectedTimer != null) {
+                         adapter?.selectedTimer = null
+                         tvNamedTimer.setText(R.string.timer)
+                         rvTimers.adapter = adapter
+                     }
                  }
+                 descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
 
              }
 
-             npSecond.minValue = Constants.MIN_VALUE
-             npSecond.maxValue = Constants.MAX_VALUE
-             npSecond.displayedValues = Constants.RANGE
-             npSecond.setOnScrollListener { _, _ ->
-                 if (adapter?.selectedTimer != null) {
-                     adapter?.selectedTimer = null
-                     tvNamedTimer.setText(R.string.timer)
-                     rvTimers.adapter = adapter
+             npSecond.apply {
+                 minValue = Constants.MIN_VALUE
+                 maxValue = Constants.MAX_VALUE
+                 displayedValues = Constants.RANGE
+                 setOnScrollListener { _, _ ->
+                     if (adapter?.selectedTimer != null) {
+                         adapter?.selectedTimer = null
+                         tvNamedTimer.setText(R.string.timer)
+                         rvTimers.adapter = adapter
+                     }
+
                  }
+                 descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
 
              }
 
@@ -127,6 +145,21 @@ class CountDownFragment : Fragment(), OnItemClickListener {
         super.onDestroy()
         _binding = null
     }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = with(binding) {
+        when(item.itemId) {
+            android.R.id.home -> {
+                tbTimer.isVisible = false
+                adapter?.selectedTimerDel = null
+                rvTimers.adapter = adapter
+            }
+            R.id.item_del -> {}
+        }
+
+        return true
+    }
+
 
     private fun startCountDownTimer() = with(binding) {
         contentTimer.isVisible = false
@@ -275,6 +308,10 @@ class CountDownFragment : Fragment(), OnItemClickListener {
         npMinute.value = timer.m
         npSecond.value = timer.s
         tvNamedTimer.text = timer.name
+    }
+
+    override fun onItemLongClick(position: Int) {
+        binding.tbTimer.isVisible = true
     }
 
 }

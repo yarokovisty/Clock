@@ -10,6 +10,7 @@
     <string name="cancel">Отмена</string>
     <string name="ready">Готово</string>
     <string name="input">Ввести</string>
+    <string name="delete">Удалить</string>
     <string name="description">Описание</string>
     <string name="add_timer">Добавить таймер</string>
     <string name="template_time">%s:%s:%s</string>

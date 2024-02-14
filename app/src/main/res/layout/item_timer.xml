@@ -33,8 +33,17 @@
             android:layout_height="wrap_content"
             android:textColor="@color/textCardView"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/cbDelete"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="00:00:00" />
+
+        <CheckBox
+            android:id="@+id/cbDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
