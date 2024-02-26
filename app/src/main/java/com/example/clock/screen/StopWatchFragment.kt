@@ -1,27 +1,31 @@
 package com.example.clock.screen
 
 import android.os.Bundle
+import android.os.CountDownTimer
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AccelerateDecelerateInterpolator
+import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.isVisible
 import com.example.clock.R
 import com.example.clock.data.ClockViewModel
-import com.example.clock.databinding.FragmentCountDownBinding
 import com.example.clock.databinding.FragmentStopWatchBinding
 import com.example.clock.navigation.App
 import com.example.clock.ui.Screens
+import java.util.concurrent.TimeUnit
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 
 class StopWatchFragment : Fragment() {
     private var _binding: FragmentStopWatchBinding? = null
     private val binding get() = _binding!!
     private val viewModel = ClockViewModel(App.INSTANCE.clockRouter)
+    private var stopWatch: CountDownTimer? = null
+    private var milliseconds: Long = 0
+    private var pause = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,6 +43,9 @@ class StopWatchFragment : Fragment() {
             val menuItem = bnvStopWatcher.menu.findItem(R.id.stop_watcher_item)
             menuItem.isChecked = true
 
+            btnReset.alpha = 0f
+            btnInterval.alpha = 0f
+
             bnvStopWatcher.setOnItemSelectedListener {
                 when (it.itemId) {
                     R.id.alarm_item -> viewModel.replaceScreen(Screens.alarmScreen())
@@ -47,11 +54,101 @@ class StopWatchFragment : Fragment() {
 
                 true
             }
+
+            btnStart.setOnClickListener {
+                if (pause) startStopWatch()
+                else pauseStopWatch()
+            }
+
+            btnReset.setOnClickListener {
+                resetStopWatch()
+            }
         }
+
+
     }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+        stopWatch?.cancel()
+    }
+
+    private fun startStopWatch() {
+        pause = false
+        animateStart()
+        binding.btnStart.setImageDrawable(
+            ContextCompat.getDrawable(
+                requireActivity(),
+                R.drawable.icon_pause
+            )
+        )
+
+        stopWatch = object : CountDownTimer(Long.MAX_VALUE, 1) {
+            override fun onTick(millisUntilFinished: Long) {
+                milliseconds++
+
+                updateStopWatch()
+
+            }
+
+            override fun onFinish() {
+
+            }
+        }
+        stopWatch?.start()
+
+    }
+
+    private fun pauseStopWatch() {
+        pause = true
+        binding.btnStart.setImageDrawable(
+            ContextCompat.getDrawable(
+                requireActivity(),
+                R.drawable.icon_arrow_play
+            )
+        )
+
+        stopWatch?.cancel()
+    }
+
+    private fun resetStopWatch() {
+        milliseconds = 0
+        binding.tvStopWatch.text = "00:00:00"
+        pause = true
+        stopWatch?.cancel()
+        binding.btnStart.setImageDrawable(
+            ContextCompat.getDrawable(
+                requireActivity(),
+                R.drawable.icon_arrow_play
+            )
+        )
+        animateFinish()
+    }
+
+    private fun updateStopWatch() {
+        val templateMilliseconds = milliseconds % 100
+        val seconds = milliseconds / 100 % 60
+        val minutes = milliseconds / 6000
+
+        binding.tvStopWatch.text = String.format("%02d:%02d:%02d", minutes, seconds, templateMilliseconds)
+    }
+
+    private fun animateStart() {
+        ViewCompat.animate(binding.btnReset)
+            .alpha(1f)
+            .translationX(240f).interpolator = AccelerateDecelerateInterpolator()
+        ViewCompat.animate(binding.btnInterval)
+            .alpha(1f)
+            .translationX(-240f).interpolator = AccelerateDecelerateInterpolator()
+    }
+
+    private fun animateFinish() {
+        ViewCompat.animate(binding.btnReset)
+            .alpha(0f)
+            .translationX(-240f).interpolator = AccelerateDecelerateInterpolator()
+        ViewCompat.animate(binding.btnInterval)
+            .alpha(0f)
+            .translationX(240f).interpolator = AccelerateDecelerateInterpolator()
     }
 }

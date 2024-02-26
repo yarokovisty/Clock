@@ -6,6 +6,98 @@
     android:layout_height="match_parent"
     android:background="@color/background">
 
+    <FrameLayout
+        android:id="@+id/frameLayout2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/bnvStopWatcher"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnReset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginVertical="@dimen/horizontal_margin"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/icon_reset"
+            app:backgroundTint="@color/bg_nav_bar"
+            app:elevation="0dp"
+            app:rippleColor="@color/put_btn"
+            app:shapeAppearanceOverlay="@style/rounded_fab"
+            app:tint="@color/iconStopWatch" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnInterval"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginVertical="@dimen/horizontal_margin"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/icon_flag"
+            app:backgroundTint="@color/bg_nav_bar"
+            app:elevation="0dp"
+            app:rippleColor="@color/put_btn"
+            app:shapeAppearanceOverlay="@style/rounded_fab"
+            app:tint="@color/iconStopWatch" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginVertical="@dimen/horizontal_margin"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/icon_arrow_play"
+            app:backgroundTint="@color/secondary"
+            app:elevation="0dp"
+            app:rippleColor="@color/put_btn"
+            app:shapeAppearanceOverlay="@style/rounded_fab"
+            app:tint="@color/white" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frameLayout3"
+        android:layout_width="@dimen/sizeTimer"
+        android:layout_height="@dimen/sizeTimer"
+        android:layout_marginTop="48dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ProgressBar
+            android:id="@+id/pbTimer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:indeterminateOnly="false"
+            android:max="6000"
+            android:progressDrawable="@drawable/circle_progressbar" />
+
+
+        <TextView
+            android:id="@+id/tvStopWatch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/item_active"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            android:text="00:00:00" />
+
+
+    </FrameLayout>
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bnvStopWatcher"
@@ -20,5 +112,67 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/menu_nav_bar" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="4dp"
+        android:orientation="horizontal"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/divider2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout3">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            tools:text="Интервал" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            tools:text="Время отрезка" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            tools:text="Всего" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/rvInterval"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout3" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvInterval"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
