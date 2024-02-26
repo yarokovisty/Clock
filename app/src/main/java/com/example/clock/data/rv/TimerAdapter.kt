@@ -9,12 +9,14 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.clock.R
+import com.example.clock.data.timer.TimerModel
 import com.example.clock.databinding.ItemTimerBinding
 
 class TimerAdapter(private val listener: OnItemClickListener, private val longClickListener: OnItemLongClickListener) : RecyclerView.Adapter<TimerAdapter.TimerHolder>() {
     private val listTimerModel = mutableListOf<TimerModel>()
+    private val indexesToRemove = mutableListOf<Int>()
     var selectedTimer: Int? = null
-    var selectedTimerDel: Int? = null
+    var selectedTimerDel = false
 
     class TimerHolder(view: View) : ViewHolder(view) {
         val binding = ItemTimerBinding.bind(view)
@@ -40,11 +42,12 @@ class TimerAdapter(private val listener: OnItemClickListener, private val longCl
         holder.bind(listTimerModel[position])
 
         holder.binding.apply {
-            if (selectedTimer == position && selectedTimerDel == null) {
+            if (selectedTimer == position && !selectedTimerDel) {
                 cvTimer.setCardBackgroundColor(
                     ContextCompat.getColor(holder.itemView.context, R.color.secondary))
             }
-            else if (selectedTimerDel != null) {
+            else if (selectedTimerDel) {
+                selectedTimer = null
                 cbDelete.isVisible = true
                 cvTimer.setCardBackgroundColor(
                     ContextCompat.getColor(holder.itemView.context, R.color.cardView))
@@ -52,6 +55,15 @@ class TimerAdapter(private val listener: OnItemClickListener, private val longCl
             else {
                 cvTimer.setCardBackgroundColor(
                     ContextCompat.getColor(holder.itemView.context, R.color.cardView))
+            }
+
+            cbDelete.setOnCheckedChangeListener { buttonView, isChecked ->
+                if (isChecked) {
+                    indexesToRemove.add(position)
+                }
+                else {
+                    indexesToRemove.remove(position)
+                }
             }
         }
 
@@ -63,7 +75,7 @@ class TimerAdapter(private val listener: OnItemClickListener, private val longCl
 
         holder.itemView.setOnLongClickListener {
             longClickListener.onItemLongClick(position)
-            selectedTimerDel = position
+            selectedTimerDel = true
             notifyDataSetChanged()
             true
         }
@@ -75,7 +87,45 @@ class TimerAdapter(private val listener: OnItemClickListener, private val longCl
         notifyDataSetChanged()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    fun addTimers(timers: List<TimerModel>) {
+        listTimerModel.addAll(timers)
+        notifyDataSetChanged()
+    }
+
     fun getTimer(position: Int): TimerModel {
         return listTimerModel[position]
     }
+
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun deleteTimers() {
+        val indexesToRemoveSorted = indexesToRemove.sortedDescending()
+
+        indexesToRemoveSorted.forEach {
+            listTimerModel.removeAt(it)
+        }
+
+        clearIndexRemove()
+        notifyDataSetChanged()
+    }
+
+    fun clearIndexRemove() {
+        indexesToRemove.clear()
+    }
+
+    fun clearTimers() = listTimerModel.clear()
+
+    fun getSelectedToDeleteTimers(): MutableList<TimerModel> {
+        val timersDelete = mutableListOf<TimerModel>()
+
+        for (i in indexesToRemove) {
+            timersDelete.add(listTimerModel[i])
+        }
+
+        return timersDelete
+    }
+
+
+
 }

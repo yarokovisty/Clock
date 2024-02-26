@@ -225,7 +225,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:menu="@menu/menu_tb_timer"
         app:navigationIcon="@drawable/icon_close"
-        app:subtitleTextColor="@color/primary_num_picker"
         app:title="@string/delete" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
