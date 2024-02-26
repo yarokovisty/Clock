@@ -201,14 +201,15 @@ class CountDownFragment : Fragment(), OnItemClickListener, OnItemLongClickListen
                 R.drawable.icon_pause
             )
         )
-        pbTimer.max = timeMillis.toInt() * 100
+        pbTimer.progress = timeMillis.toInt() / 1000
 
         timer?.cancel()
         timer = object : CountDownTimer(timeMillis, 1) {
             override fun onTick(millisUntilFinished: Long) {
                 millis = millisUntilFinished
-                pbTimer.progress = (millis / timeMillis * 100).toInt()
-                val seconds = millisUntilFinished / 1000
+                pbTimer.progress = (millisUntilFinished / 1000).toInt()
+                Log.i("MyLog", pbTimer.progress.toString())
+                val seconds = millis / 1000
                 val minutes = (seconds % 3600) / 60
                 val hours = seconds / 3600
                 val remainingSeconds = seconds % 60
