@@ -12,6 +12,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.isVisible
 import com.example.clock.R
 import com.example.clock.data.ClockViewModel
+import com.example.clock.data.Interval
+import com.example.clock.data.rv.IntervalAdapter
 import com.example.clock.databinding.FragmentStopWatchBinding
 import com.example.clock.navigation.App
 import com.example.clock.ui.Screens
@@ -23,8 +25,10 @@ class StopWatchFragment : Fragment() {
     private var _binding: FragmentStopWatchBinding? = null
     private val binding get() = _binding!!
     private val viewModel = ClockViewModel(App.INSTANCE.clockRouter)
+    private var adapter: IntervalAdapter? = null
     private var stopWatch: CountDownTimer? = null
     private var milliseconds: Long = 0
+    private var numInterval = 0
     private var pause = true
 
     override fun onCreateView(
@@ -38,6 +42,8 @@ class StopWatchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        adapter = IntervalAdapter()
 
         binding.apply {
             val menuItem = bnvStopWatcher.menu.findItem(R.id.stop_watcher_item)
@@ -63,6 +69,15 @@ class StopWatchFragment : Fragment() {
             btnReset.setOnClickListener {
                 resetStopWatch()
             }
+
+            btnInterval.setOnClickListener {
+                numInterval++
+
+                if (numInterval == 1) {
+
+                }
+
+            }
         }
 
 
@@ -71,6 +86,7 @@ class StopWatchFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+        adapter = null
         stopWatch?.cancel()
     }
 
@@ -114,6 +130,8 @@ class StopWatchFragment : Fragment() {
 
     private fun resetStopWatch() {
         milliseconds = 0
+        numInterval = 0
+        adapter?.clearIntervals()
         binding.tvStopWatch.text = "00:00:00"
         pause = true
         stopWatch?.cancel()
@@ -123,6 +141,7 @@ class StopWatchFragment : Fragment() {
                 R.drawable.icon_arrow_play
             )
         )
+        binding.pbTimer.progress = 0
         animateFinish()
     }
 
@@ -131,8 +150,13 @@ class StopWatchFragment : Fragment() {
         val seconds = milliseconds / 100 % 60
         val minutes = milliseconds / 6000
 
-        binding.tvStopWatch.text = String.format("%02d:%02d:%02d", minutes, seconds, templateMilliseconds)
+        binding.apply {
+            tvStopWatch.text = String.format("%02d:%02d,%02d", minutes, seconds, templateMilliseconds)
+            pbTimer.progress = (milliseconds % 6000).toInt()
+        }
+
     }
+
 
     private fun animateStart() {
         ViewCompat.animate(binding.btnReset)
@@ -146,9 +170,9 @@ class StopWatchFragment : Fragment() {
     private fun animateFinish() {
         ViewCompat.animate(binding.btnReset)
             .alpha(0f)
-            .translationX(-240f).interpolator = AccelerateDecelerateInterpolator()
+            .translationX(-120f).interpolator = AccelerateDecelerateInterpolator()
         ViewCompat.animate(binding.btnInterval)
             .alpha(0f)
-            .translationX(240f).interpolator = AccelerateDecelerateInterpolator()
+            .translationX(120f).interpolator = AccelerateDecelerateInterpolator()
     }
 }
