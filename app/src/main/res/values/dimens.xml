@@ -9,7 +9,10 @@
     <dimen name="textSizeNumPicker">42sp</dimen>
     <dimen name="textSizeDialogNumPicker">20sp</dimen>
     <dimen name="textSizeItemInterval">16sp</dimen>
+    <dimen name="textSizeTimeItemAlarm">32sp</dimen>
     <dimen name="top_margin">64dp</dimen>
     <dimen name="sizeTimer">250dp</dimen>
     <dimen name="marginVerticalItemInterval">8dp</dimen>
+    <dimen name="margin_cardview_alarm">16dp</dimen>
+
 </resources>

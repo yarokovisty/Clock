@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/cardView"
+    app:cardCornerRadius="@dimen/corner_cardview">
+
+    <TextView
+        android:id="@+id/tvAlarm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|start"
+        android:layout_margin="@dimen/margin_cardview_alarm"
+        android:textSize="@dimen/textSizeTimeItemAlarm"
+        tools:text="00:00" />
+
+    <Switch
+        android:id="@+id/turnAlarm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|end"
+        android:layout_marginEnd="32dp"
+        android:checked="true"
+        android:scaleX="2"
+        android:scaleY="2"
+        android:thumb="@drawable/ic_thumb"
+        android:track="@drawable/bg_track"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+</androidx.cardview.widget.CardView>
