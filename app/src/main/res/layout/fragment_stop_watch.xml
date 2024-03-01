@@ -68,7 +68,7 @@
         android:layout_height="@dimen/sizeTimer"
         android:layout_marginTop="48dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+        app:layout_constraintBottom_toTopOf="@+id/titleInterval"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -113,7 +113,7 @@
         app:menu="@menu/menu_nav_bar" />
 
     <LinearLayout
-        android:id="@+id/linearLayout3"
+        android:id="@+id/titleInterval"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -121,7 +121,7 @@
         android:layout_marginBottom="4dp"
         android:orientation="horizontal"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/divider2"
+        app:layout_constraintBottom_toTopOf="@+id/dTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayout3">
@@ -131,7 +131,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            tools:text="Интервал" />
+            android:text="@string/interval" />
 
         <TextView
             android:id="@+id/textView3"
@@ -139,7 +139,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            tools:text="Время отрезка" />
+            android:text="@string/time_segment" />
 
         <TextView
             android:id="@+id/textView6"
@@ -147,11 +147,11 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="end"
-            tools:text="Всего" />
+            android:text="@string/all"/>
     </LinearLayout>
 
     <View
-        android:id="@+id/divider2"
+        android:id="@+id/dTitle"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="?android:attr/listDivider"
@@ -159,7 +159,7 @@
         app:layout_constraintBottom_toTopOf="@+id/rvInterval"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/linearLayout3" />
+        app:layout_constraintTop_toBottomOf="@id/titleInterval" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvInterval"
@@ -168,10 +168,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:visibility="invisible"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/frameLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider2" />
+        app:layout_constraintTop_toBottomOf="@+id/dTitle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

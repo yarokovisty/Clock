@@ -1,9 +1,12 @@
 package com.example.clock.data.rv
 
+import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.clock.R
 import com.example.clock.data.Interval
 import com.example.clock.databinding.ItemIntervalBinding
@@ -11,39 +14,38 @@ import kotlin.math.min
 
 class IntervalAdapter : RecyclerView.Adapter<IntervalAdapter.IntervalHolder>() {
     private val intervals = mutableListOf<Interval>()
+    inner class IntervalHolder(view: View): ViewHolder(view) {
+        val binding = ItemIntervalBinding.bind(view)
 
-    class IntervalHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val binding = ItemIntervalBinding.bind(view)
+        fun bind(interval: Interval) = with(interval) {
+            var milli = time % 100
+            var s = time / 100 % 60
+            var m = time / 6000
+            val templateTime = String.format("%02d:%02d,%02d", m, s, milli)
 
-        fun bind(interval: Interval) {
-            val milliseconds = interval.time % 100
-            val seconds = interval.time / 100 % 60
-            val minutes = interval.time / 6000
-            val templateTime = String.format("%02d:%02d,%02d", minutes, seconds, milliseconds)
+            val templateTimeMargin = if (id == 1) {
+                templateTime
+            } else {
+                val milliMargin = interval.time - intervals[id - 2].time
+                milli = milliMargin % 100
+                s = milliMargin / 100 % 60
+                m = milliMargin / 6000
+                val templateSegmentTime = String.format("%02d:%02d,%02d", m, s, milli)
 
-            val segmentTimeMilliseconds = interval.time - interval.previousTime
-            val segmentMilliseconds = segmentTimeMilliseconds % 100
-            val segmentSeconds = segmentTimeMilliseconds / 100 % 60
-            val segmentMinutes = segmentTimeMilliseconds / 6000
-            val templateSegmentTime = String.format(
-                "+%02d:%02d,%02d",
-                segmentMilliseconds,
-                segmentSeconds,
-                segmentMinutes
-            )
+                templateSegmentTime
+            }
+
 
             binding.apply {
-                tvIdInterval.text = String.format("%02d", interval.id)
-                tvSegmentTime.text = templateSegmentTime
-                tvSegmentTime.text = templateTime
-
+                tvIdInterval.text = String.format("%02d", id)
+                tvSegmentTime.text = templateTimeMargin
+                tvTime.text = templateTime
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IntervalHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_interval, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_interval, parent, false)
 
         return IntervalHolder(view)
     }
@@ -56,11 +58,17 @@ class IntervalAdapter : RecyclerView.Adapter<IntervalAdapter.IntervalHolder>() {
         holder.bind(intervals[position])
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun addInterval(interval: Interval) {
         intervals.add(interval)
+        notifyDataSetChanged()
     }
 
-    fun clearIntervals() = intervals.clear()
+    @SuppressLint("NotifyDataSetChanged")
+    fun clearIntervals() {
+        intervals.clear()
+        notifyDataSetChanged()
+    }
 
-    fun getPreviousIntervalTime(position: Int) = intervals[position - 1].time
+
 }

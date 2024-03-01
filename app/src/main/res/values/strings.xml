@@ -15,4 +15,7 @@
     <string name="add_timer">Добавить таймер</string>
     <string name="template_time">%s:%s:%s</string>
     <string name="finish_time">Время вышло</string>
+    <string name="interval">Интервал</string>
+    <string name="time_segment">Время отрезка</string>
+    <string name="all">Всего</string>
 </resources>

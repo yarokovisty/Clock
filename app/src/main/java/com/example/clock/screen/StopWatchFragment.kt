@@ -2,6 +2,7 @@ package com.example.clock.screen
 
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -71,20 +72,36 @@ class StopWatchFragment : Fragment() {
             }
 
             btnInterval.setOnClickListener {
-                numInterval++
+                if (!pause) {
+                    binding.apply {
+                        titleInterval.isVisible = true
+                        dTitle.isVisible = true
+                        Log.i("MyLog", rvInterval.isVisible.toString())
+                    }
 
-                if (numInterval == 1) {
+                    numInterval++
 
+                    adapter?.addInterval(Interval(
+                        numInterval,
+                        milliseconds
+                    ))
+
+                    rvInterval.adapter = adapter
                 }
 
+
             }
+
+
         }
+
 
 
     }
 
     override fun onDestroy() {
         super.onDestroy()
+        binding.pbTimer.progress = 0
         _binding = null
         adapter = null
         stopWatch?.cancel()
@@ -133,6 +150,8 @@ class StopWatchFragment : Fragment() {
         numInterval = 0
         adapter?.clearIntervals()
         binding.tvStopWatch.text = "00:00:00"
+        binding.titleInterval.isVisible = false
+        binding.dTitle.isVisible = false
         pause = true
         stopWatch?.cancel()
         binding.btnStart.setImageDrawable(

@@ -8,6 +8,8 @@
     <dimen name="horizontal_margin_float">4dp</dimen>
     <dimen name="textSizeNumPicker">42sp</dimen>
     <dimen name="textSizeDialogNumPicker">20sp</dimen>
+    <dimen name="textSizeItemInterval">16sp</dimen>
     <dimen name="top_margin">64dp</dimen>
     <dimen name="sizeTimer">250dp</dimen>
+    <dimen name="marginVerticalItemInterval">8dp</dimen>
 </resources>
